@@ -1,5 +1,5 @@
 import express from 'express';
-import DoceController from './Controllers/DoceController.js';
+import LoginController from './Controllers/LoginController.js';
 
 const server = express();
 
@@ -9,9 +9,9 @@ server.get('/',(req,res)=>{
     res.status(200).json("Servidor Funcionando");
 })
 
-server.get('/doces',DoceController.read);
-server.post('/doces',DoceController.create);
-server.put('/doces/:id_doce', DoceController.update);
-server.delete('/doces/:id_doce',DoceController.delete)
+server.get('/login',LoginController.read);
+server.post('/login',LoginController.create);
+server.put('/login/:id_usuario', LoginController.update);
+server.delete('/login/:id_usuario',LoginController.delete)
 
 server.listen(5000);

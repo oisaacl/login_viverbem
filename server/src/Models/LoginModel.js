@@ -1,27 +1,27 @@
 import mysql from "mysql2"
 import config from "../Config.js";
 
-class DoceModel {
+class LoginModel {
     constructor() {
         this.conexao = mysql.createConnection(config.db);
     }
 
   
-   create(nome) {
-    let sql = `insert into parafusos (nome) values ("${nome}");`
+   create(id_usuario, cpf, senha) {
+    let sql = `insert into usuarios (nome) values ("${nome}");`
     
     return new Promise ((resolve,reject)=>{
     this.conexao.query(sql,(erro,retorno)=>{
     if(erro){
     reject([400,erro])
     }
-    resolve([201, "Doce Adicionado"])
+    resolve([201, "Usuário Adicionado"])
     })
     });
     }
 
     read() {
-        let sql = `SELECT * FROM parafusos;`;
+        let sql = `SELECT * FROM usuarios;`;
 
         return new Promise((resolve, reject) => {
             this.conexao.query(sql, (erro, retorno)=>{
@@ -34,7 +34,7 @@ class DoceModel {
     }
 
     update(id_doce, nome) {
-        let sql = `update doces set nome = "${nome}" WHERE id_doces="${id_doce}"`
+        let sql = `update usuarios set nome = "${nome}" WHERE id_usuario="${id_usuario}"`
 
 
         return new Promise((resolve, reject) => {
@@ -42,16 +42,16 @@ class DoceModel {
                 if (erro) {
                     reject([400, erro])
                 } else if (retorno.affectedRows > 0) {
-                    resolve([200, "Doce Atualizado"])
+                    resolve([200, "Usuario Atualizado"])
                 } else {
-                    resolve([404, "Doce nao encontrado"])
+                    resolve([404, "Usuario nao encontrado"])
                 }
             })
         });
     }
 
-    delete(id_doce) {
-        let sql = `delete from doces where id_doces ="${id_doce}"`
+    delete(id_usuario) {
+        let sql = `delete from usuarios where id_usuario ="${id_usuario}"`
         return new Promise((resolve, reject) => {
             this.conexao.query(sql, (erro, retorno)=>{
                 if (erro) {
@@ -60,7 +60,7 @@ class DoceModel {
                 } else if (retorno.affectedRows > 0) {
                     resolve([200, retorno])
                 } else {
-                    resolve([404], "Doce não encontrado")
+                    resolve([404], "Usuario não encontrado")
                 }
             })
         });
@@ -68,4 +68,4 @@ class DoceModel {
 }
 
 
-export default new DoceModel(0);
+export default new LoginModel(0);

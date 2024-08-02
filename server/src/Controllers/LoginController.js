@@ -1,72 +1,72 @@
-import DoceModel from "../Models/DoceModel.js";
+import LoginModel from "../Models/LoginModel.js";
 
-class DoceController {
+class LoginController {
     constructor() {
     }
 
     create(req, res) {
         const nome = req.body.nome;
-        DoceModel.create(nome).then(
+        LoginModel.create(nome).then(
             resposta => {
-                console.debug("Inserindo um Doce");
+                console.debug("Login efetuado com sucesso");
                 res.status(resposta[0]).json(resposta[1])
             }
         ).catch(
             resposta =>{
-                console.debug("Erro: inserindo um Doce");
+                console.debug("Erro: CPF ou Senha inválido");
                 res.status(resposta[0]).json(resposta[1])
             }
         )
     }
 
     read(req, res) {
-        DoceModel.read().then(
+        LoginModel.read().then(
             resposta => {
-                console.debug("Mostrando um Doce");
+                console.debug("Login efetuado");
                 res.status(resposta[0]).json(resposta[1])
             }
         ).catch(
             resposta => {
-                console.debug("Erro mostrando um Doce");
+                console.debug("Erro ao efetuar login");
                 console.debug(resposta)
                 res.status(resposta[0]).json(resposta[1])
             }
         );
     }
     update(req, res) {
-        const id_doce = req.params.id_doce;
+        const id_usuario = req.params.id_login;
         const nome = req.body.nome;
 
-        DoceModel.update(id_doce, nome).then(
+        LoginModel.update(id_usuario, cpf, senha).then(
             resposta => {
-                console.debug("atualizando doce")
+                console.debug("atualizando login")
                 res.status(resposta[0]).json(resposta[1])
             }
 
         ).catch(
             resposta => {
-                console.debug("erro: atualizando doce")
+                console.debug("erro: ao atualizar login")
                 res.status(resposta[0]).json(resposta[1])
             }
         )
     }
     delete(req, res) {
-        const id_doce = req.params.id_doce;
+        const id_usuario = req.params.id_usuario;
 
-        DoceModelModel.delete(id_doce).then(
+        LoginModel.delete(id_usuario).then(
             resposta => {
 
-                console.debug("Deletando um doce");
+                console.debug("Deletando um usuario");
                 res.status(resposta[0]).json(resposta[1])
             }
         ).catch(
             resposta => {
                 console.debug(resposta)
-                console.debug("Erro ao deletar doce");
+                console.debug("Erro ao deletar um usuario");
                 res.status(resposta[0]).json(resposta[1])
             }
         )
     }
 }
 
-export default new DoceController();
+export default new LoginController();
