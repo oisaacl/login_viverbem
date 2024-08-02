@@ -3,7 +3,7 @@ const config = {
         host:"localhost",
         user:"root",
         password:"",
-        database:"pagina_login"
+        database:"viver_bem_mais"
     }
 }
 

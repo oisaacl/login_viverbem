@@ -5,8 +5,10 @@ class LoginController {
     }
 
     create(req, res) {
-        const nome = req.body.nome;
-        LoginModel.create(nome).then(
+        // const cpf = req.body.cpf;
+        const {cpf,senha} = req.body;
+
+        LoginModel.create(cpf, senha).then(
             resposta => {
                 console.debug("Login efetuado com sucesso");
                 res.status(resposta[0]).json(resposta[1])
@@ -34,10 +36,10 @@ class LoginController {
         );
     }
     update(req, res) {
-        const id_usuario = req.params.id_login;
-        const nome = req.body.nome;
+        const id_usuario = req.params.id_usuario;
+        const {cpf,senha} = req.body;
 
-        LoginModel.update(id_usuario, cpf, senha).then(
+        LoginModel.update(id_usuario,cpf,senha).then(
             resposta => {
                 console.debug("atualizando login")
                 res.status(resposta[0]).json(resposta[1])

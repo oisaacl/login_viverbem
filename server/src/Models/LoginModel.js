@@ -7,8 +7,8 @@ class LoginModel {
     }
 
   
-   create(id_usuario, cpf, senha) {
-    let sql = `insert into usuarios (nome) values ("${nome}");`
+   create( cpf, senha) {
+    let sql = `insert into pagina_login (cpf,senha) values ("${cpf}","${senha}");`
     
     return new Promise ((resolve,reject)=>{
     this.conexao.query(sql,(erro,retorno)=>{
@@ -21,7 +21,7 @@ class LoginModel {
     }
 
     read() {
-        let sql = `SELECT * FROM usuarios;`;
+        let sql = `SELECT * FROM pagina_login;`;
 
         return new Promise((resolve, reject) => {
             this.conexao.query(sql, (erro, retorno)=>{
@@ -33,8 +33,8 @@ class LoginModel {
         });
     }
 
-    update(id_doce, nome) {
-        let sql = `update usuarios set nome = "${nome}" WHERE id_usuario="${id_usuario}"`
+    update(id_usuario,cpf,senha) {
+        let sql = `update pagina_login set cpf  = "${cpf}", senha = "${senha}" WHERE id_usuario="${id_usuario}"`
 
 
         return new Promise((resolve, reject) => {
@@ -51,16 +51,17 @@ class LoginModel {
     }
 
     delete(id_usuario) {
-        let sql = `delete from usuarios where id_usuario ="${id_usuario}"`
+        let sql = `delete from pagina_login where id_usuario ="${id_usuario}"`
         return new Promise((resolve, reject) => {
             this.conexao.query(sql, (erro, retorno)=>{
+                console.debug (erro)
                 if (erro) {
                     console.debug(erro)
                     reject([400, erro])
                 } else if (retorno.affectedRows > 0) {
-                    resolve([200, retorno])
+                    resolve([200, "Usuario Deletado"])
                 } else {
-                    resolve([404], "Usuario não encontrado")
+                    resolve([404, "Usuario não encontrado"])
                 }
             })
         });
